@@ -1,0 +1,190 @@
+                                 PL/SQL
+                              ============
+
+PL/SQL is an procedure language extension for SQL. oracle 6.0
+ introduced PL/SQL.
+
+Basically pl/sql is an block structure programming language.
+
+
+1.declaring a variable
+======================
+
+  in declare section of pl/sql block by using following syntax
+
+syntax:-
+=======
+variablename datatype(size);
+
+a number(10);
+
+
+
+2.storing a value into variable:-
+================================
+
+   By using assignment operator(:=) we can also store a value
+into variable.
+
+
+syntax:-
+=======
+     variablename:=value;
+
+   we can also use this assignment operator(:=) either in declare
+section or in executable section in pl/sql block.
+
+EX:-
+===
+declare
+a number(10);
+begin
+a:=80;
+end;
+/
+
+3.Display a message (or) variable value:-
+======================================
+
+   In pl/sql if we want to display a message or variable value then
+we are using following syntax.
+
+syntax:-
+=======
+dbms_output.put_line('message');
+
+dbms_output.put_line(variablename);
+    |          |
+package      procedure
+name         name
+
+   This package is used in either in executable section or in exception
+section of the pl/sql block.
+
+eg:-
+===
+begin
+dbms_output.put_line('welcome');
+end;
+/
+
+PL/SQL procedure successfully completed
+
+        In pl/sql whenever we are passing any data into dbms_output package 
+then that package internally automatically creates a buffer and also passed data automatically stored in buffer but this buffer data does not visible in sqlplus client tool.To overcome this problem then we must set serveroutput environment variable by using following syntax at sql prompt. 
+
+syntax:-
+=======
+SQL>set serveroutput on;
+
+SQL> /
+
+    welcome
+
+
+ *
+*** select....into clause:- 
+ *  ======================
+
+   Select.... into clause is used to retrieve data from table then that 
+data is storing into pl/sql variable.
+
+  select.... into clause always returns single record or single value
+at a time from a table.
+
+syntax:-
+=======
+select col1,col2....into varname1,varname2.....
+from tablename
+where condition;
+
+ This clause is used in executable section of the pl/sql block.
+
+
+----------------------------------------------------------------------------------
+1.Write a PL/SQL program to print a message 'WELCOME TO PL/SQL  
+  CLASSES FOR MY DEAR WONDERFULL BATACH39' on screen?
+
+
+
+NOTE:-To avoid of displaying old and new parameters set verify off as
+      following
+
+SQL>set verify off;
+
+
+-----------------------------------------------------------------------------------
+2.Write a PL/SQL program to add 2 numbers. And two numbers are 
+  enter from runtime ?
+
+
+-----------------------------------------------------------------------------------
+3.Write a PL/SQL program for user entered employee number then display
+  name of the employee and his salary from emp table?
+
+
+-----------------------------------------------------------------------------------
+4.Write a PL/SQL program which is used to retrieve maximum salary
+      from emp table and store it into PL/SQL variable
+              and display maximum salary?
+
+
+
+
+SQL> @d:\PLSQLREPO\MessagePrint.sql
+WELCOME TO PL/SQL CLASSES FOR MY DEAR WONDERFULL BATACH 49
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:\PLSQLREPO\Add2Number.sql
+Enter value for x: 20
+Enter value for y: 20
+Sum 40
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:\PLSQLREPO\DRLExample.sql
+Enter value for empno: 7699
+        dbms_output.put_line(V_ename || '   ' V_sal);
+                                              *
+ERROR at line 10:
+ORA-06550: line 10, column 47:
+PLS-00103: Encountered the symbol "V_SAL" when expecting one of the following:
+) , * & | = - + < / > at in is mod remainder not null rem
+returning with => .. <an exponent (**)> <> or != or ~= >= <=
+<> and or default like like2 like4 likec as between error
+from using || member empty submultiset lax strict without
+pretty ascii true false absent format allow truncate
+The symbol "," was substituted for "V_SAL" to continue.
+
+
+SQL> @d:\PLSQLREPO\DRLExample.sql
+Enter value for empno: 7699
+DECLARE
+*
+ERROR at line 1:
+ORA-01403: no data found
+ORA-06512: at line 8
+
+
+SQL> @d:\PLSQLREPO\DRLExample.sql
+Enter value for empno: 7699
+DECLARE
+*
+ERROR at line 1:
+ORA-01403: no data found
+ORA-06512: at line 8
+
+
+SQL> @d:\PLSQLREPO\DRLExample.sql
+Enter value for empno: 7788
+SCOTT   3000
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:\PLSQLREPO\PLSQLDAY1\MaxSalSearch.sql
+MAX SAL 5000
+
+PL/SQL procedure successfully completed.
+
+SQL>

@@ -1,0 +1,4 @@
+BEGIN 
+        dbms_output.put_line('WELCOME TO PL/SQL CLASSES FOR MY DEAR WONDERFULL BATACH 49');
+END;
+/
