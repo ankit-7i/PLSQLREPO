@@ -1,0 +1,88 @@
+                                     PL/SQL
+                                    =========
+
+
+1.Write a PL/SQL program to calculate the experience of the given employee
+  based on passed employee number ?
+
+Enter value for empno: 7902
+experience is:43years
+
+-----------------------------------------------------------------------------------
+variable attributes(%type,%rowtype):-
+====================================
+
+   pl/sql having two types of variable attributes
+1)column level attributes
+2)row level attributes
+
+1)column level attributes
+
+syntax:-
+========
+variable tablename.columnname%type;
+
+2)row level attributes
+
+syntax:-
+========
+variablename tablename%rowtype
+
+
+
+EG:-
+===
+declare                 particular cell you want(.notation)
+i emp%rowtype;          /
+                    i.ename              i.hiredate  i.sal
+    i                /                        /       /
+  -----     empno  ename    job     mgr   hiredate   sal  comm  deptno
+  | . |---->7902   FORD   ANALYST   7566  03-DEC-81  4900        20
+  -----
+
+----------------------------------------------------------------------------------
+
+2.Write a PL/SQL program to retrieve and display the employee name, salary,
+  and hiredate from the EMP table for a user entered empno using 
+  column level attributes(%type).
+
+
+
+3.Write a PL/SQL program to display all the details of an employee from 
+  the EMP table for a user entered empno using row level attributes(%rowtype).
+
+
+
+
+
+
+SQL> @d:\PLSQLREPO\PLSQLDAY2\FindExpFromEmp.sql
+Enter value for empno: 7902
+EXPERIENCE = 43YEARS
+
+PL/SQL procedure successfully completed.
+
+SQL> @d:\PLSQLREPO\PLSQLDAY2\FetchEmployeeData.sql
+Enter value for empno: 7902
+FORD   3000   03-DEC-81
+
+PL/SQL procedure successfully completed.
+
+SQL> desc emp;
+ Name                                                                         Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPNO                                                                        NOT NULL NUMBER(4)
+ ENAME                                                                         VARCHAR2(10)
+ JOB                                                                           VARCHAR2(9)
+ MGR                                                                           NUMBER(4)
+ HIREDATE                                                                      DATE
+ SAL                                                                           NUMBER(7,2)
+ COMM                                                                          NUMBER(7,2)
+ DEPTNO                                                                        NUMBER(2)
+ MAILID                                                                        VARCHAR2(15)
+
+SQL> @d:\PLSQLREPO\PLSQLDAY2\FetchEmployeeAllDetails.sql
+Enter value for empno: 7902
+7902   FORD   3000   03-DEC-81   ANALYST   7566   20   FORD81@tcs.com
+
+PL/SQL procedure successfully completed.
