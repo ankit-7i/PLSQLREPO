@@ -1,0 +1,207 @@
+                           PL/SQL DAY3
+                          ===============
+
+1.Write a PL/SQL program to increase salary of the given empno
+  with given amount.after increasing the sal display the salary
+  of the employee?
+
+Enter value for empno :7499
+Enter value for amount:2000
+salary is increased(Msg i want to display)
+salary is:3600
+
+
+-----------------------------------------------------------------------------------
+
+2.Write a PL/SQL program eligible for voting system based on age
+
+if age is>=18 then display a message : You are eligible for voting.
+
+if age is<18 then display a message  : You are not eligible for voting.
+                                       Better luck next time.
+
+
+-----------------------------------------------------------------------------------
+
+3.Write a PL/SQL program that accepts a student ID, fetches the marks from 
+  a student111 table, display the grade based on the following conditions
+
+if Marks >= 90 then display a message ---> Grade A
+
+if Marks >= 80 then display a message ---> Grade B
+
+if Marks >= 70 then display a message ---> Grade C
+
+if Marks >= 35 then display a message ---> Grade D
+
+Marks < 35 --->then display a message ---> FAIL
+
+
+
+CREATE TABLE STUDENT111
+(
+SID NUMBER(10),
+SNAME VARCHAR2(10),
+MARKS NUMBER(10)
+);
+
+
+INSERT INTO STUDENT111 VALUES(1,'SURYA',86);
+INSERT INTO STUDENT111 VALUES(2,'KAVYA',12);
+INSERT INTO STUDENT111 VALUES(3,'ANUSHKA',92);
+INSERT INTO STUDENT111 VALUES(4,'GOWTHAM',74);
+INSERT INTO STUDENT111 VALUES(5,'KIRAN',30);
+
+COMMIT;
+
+select * from student111;
+
+      SID      	NAME	  MARKS
+     -----    --------   -------
+      1	       SURYA	   88
+      2	       KAVYA	   74
+      3	       ANUSHKA 	   92
+      4	       PREETHI	   12
+      5	       NITHISH	   30
+
+----------------------------------------------------------------------------------
+
+4.Write a PL/SQL program to calculate total,averege and result.
+
+  STUDENT222
+
+    SID        SNAME        SUB1      SUB2     SUB3
+   ------     --------     ------    ------   ------
+    1001       SURYA         80        60       74
+    1002      ANUSHKA        56        30       40
+
+
+    RESULTS
+
+    SID       TOTAL       AVG       RESULT
+   ------    -------     ------    --------
+
+
+• Accept a student id as input
+
+• Calculate the total marks,average,and result
+   
+   • if the student marks 35 or more in all subjects,result='PASS'
+   • if the student marks less than 35 in any subject,result='FAIL'
+
+• Insert the calculated values into the RESULTS table
+
+
+CREATE TABLE STUDENT222 (
+    SID NUMBER(10) ,
+    SNAME VARCHAR2(10),
+    SUB1 NUMBER(10),
+    SUB2 NUMBER(10),
+    SUB3 NUMBER(10)
+);
+
+
+
+CREATE TABLE RESULTS (
+    SID NUMBER(10) ,
+    TOTAL NUMBER(10),
+    AVG NUMBER(4,2),
+    RESULT VARCHAR2(10)
+);
+
+INSERT INTO STUDENT222 VALUES (1001, 'SURYA', 80, 60, 74);
+INSERT INTO STUDENT222 VALUES (1002, 'ANUSHKA', 56, 30, 40);
+
+commit;
+
+
+
+
+SQL> Set lines 200  pages 200;
+SQL> set verify off;
+SQL> set SERVEROUTPUT ON;
+SQL>
+SQL> @D:\PLSQLREPO\PLSQLDAY3\SalaryIncr.sql;
+Enter value for empno: 7499
+Enter value for amount: 1200
+salary is increased
+Salary is 2800
+
+PL/SQL procedure successfully completed.
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\VotingEligibility.sql;
+Enter value for age: 21
+You are elgible For voting
+
+PL/SQL procedure successfully completed.
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\GradeFinder.sql;
+Enter value for sid: 1
+        S_id := 1;
+        *
+ERROR at line 6:
+ORA-06550: line 6, column 9:
+PLS-00201: identifier 'S_ID' must be declared
+ORA-06550: line 6, column 9:
+PL/SQL: Statement ignored
+ORA-06550: line 7, column 62:
+PL/SQL: ORA-00904: "S_ID": invalid identifier
+ORA-06550: line 7, column 9:
+PL/SQL: SQL Statement ignored
+
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\GradeFinder.sql;
+Enter value for sid: 1
+        S_id := 1;
+        *
+ERROR at line 6:
+ORA-06550: line 6, column 9:
+PLS-00201: identifier 'S_ID' must be declared
+ORA-06550: line 6, column 9:
+PL/SQL: Statement ignored
+ORA-06550: line 7, column 62:
+PL/SQL: ORA-00904: "S_ID": invalid identifier
+ORA-06550: line 7, column 9:
+PL/SQL: SQL Statement ignored
+
+
+SQL> SET SERVEROUTPUT ON;
+SQL> @D:\PLSQLREPO\PLSQLDAY3\GradeFinder.sql;
+Enter value for sid: 1
+Grade - B
+
+PL/SQL procedure successfully completed.
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\GradeFinder.sql;
+Enter value for sid: 3
+Grade - A
+
+PL/SQL procedure successfully completed.
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\AvgCalculation.sql;
+Enter value for sid: 1001
+        if (SUB1 > 35 AND SUB2 > 35 AND SUB3 >35 ) THEN
+            *
+ERROR at line 16:
+ORA-06550: line 16, column 13:
+PLS-00201: identifier 'SUB1' must be declared
+ORA-06550: line 16, column 9:
+PL/SQL: Statement ignored
+ORA-06550: line 19, column 13:
+PLS-00201: identifier 'SUB1' must be declared
+ORA-06550: line 19, column 9:
+PL/SQL: Statement ignored
+
+
+SQL> @D:\PLSQLREPO\PLSQLDAY3\AvgCalculation.sql;
+Enter value for sid: 1001
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for sid: 1002
+
+PL/SQL procedure successfully completed.
+
+SQL>
+
