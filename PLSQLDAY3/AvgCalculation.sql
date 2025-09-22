@@ -1,4 +1,4 @@
-DECLARE 
+ DECLARE 
         S_id STUDENT222.sid%type;
         r STUDENT222%rowtype;
         total Number (7,2);
