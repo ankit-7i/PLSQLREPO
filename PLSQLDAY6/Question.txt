@@ -1,0 +1,363 @@
+                             CURSOR TASK 
+                           ================
+
+4)%rowcount:-This attribute always returns number data type. i.e.
+===========  it counts no of records fetched from cursor memory area.
+
+syntax:-
+=======
+cursorname%rowcount
+
+eg:-
+===
+declare
+cursor c1 is select ename,sal from emp;
+v_ename varchar2(10);
+v_sal number(10);
+begin
+open c1;
+fetch c1 into v_ename,v_sal;
+dbms_output.put_line(v_ename||' '||v_sal);
+fetch c1 into v_ename,v_sal;
+dbms_output.put_line(v_ename||' '||v_sal);
+dbms_output.put_line('Number of records fetched from cursor memory
+                       area is:'||' '||c1%rowcount);
+close c1;
+end;
+/
+
+OUTPUT:-
+=======
+SMITH 800
+ALLEN 1600
+Number of records fetched from cursor memory area is: 2
+
+
+
+--------------------------------------------------------------------------
+
+Eliminating explicit cursor life cycle
+         (or)
+cursor for loop
+
+  in oracle we can also eliminate explicit cursor life cycle by using
+cursor for loop.This method also called as shortcut method of the 
+explicit cursor. Whenever we are using cursor for loop then we are
+not require to use open, fetch, close statements in pl/sql block
+because when we are using cursor for loop then oracle server only
+internally automatically open the cursor and then fetch data from the
+cursor and also close the cursor automatically after processing.
+
+cursor for loop syntax:-
+=======================
+syntax:-
+======
+for indexvariablename in cursorname
+loop
+stmts;
+end lop;
+
+   This cursor for loop is used in executable section 
+of the pl/sql.
+
+***NOTE:-In cursor for loop index variable internally behaves like a 
+======== record type variable(%rowtype)
+
+
+--------------------USE SHORTCUT METHOD(CURSOR FOR LOOP)---------------------------
+
+1.Write a pl/sql explicit cursor program which is used to display all
+   records from emp table by using cursor for loop ?
+
+
+-----------------------------------------------------------------------------------
+
+2.Write a pl/sql explicit cursor program which is used to display 5th record 
+  from emp table by using cursor for loop(using %rowcount)?
+
+
+-----------------------------------------------------------------------------------
+
+3.Write a pl/sql explicit cursor program which is used to display total salary
+  from emp table without using sum() function by using cursor for loop?
+
+
+-----------------------------------------------------------------------------------
+
+4.Write a pl/sql explicit cursor program which is used to display even no of records from emp table by using %rowcount attribute?
+
+
+----------------------------------------------------------------------------------
+5.Write a pl/sql cursor program which is used to display first 5 highest salary       employees from emp table by using cursor for loop(%rowcount)
+
+------------------------------***END***-------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------***ANSWERS***-----------------------------------
+
+1.
+ 
+declare
+cursor c1 is select * from emp;
+begin
+for i in c1
+    |---->index variable internally behaves like a record type variable.
+loop 
+dbms_output.put_line(i.ename||' '||i.sal||' '||i.hiredate);
+end loop;
+end;
+/
+
+OUTPUT:-
+=======
+SMITH  800  17-DEC-80
+ALLEN  1600 20-FEB-81
+WARD   1250 22-FEB-81
+JONES  2975 02-APR-81
+MARTIN 1250 28-SEP-81
+BLAKE  2850 01-MAY-81
+CLARK  2450 09-JUN-81
+SCOTT  3000 09-DEC-82
+KING   5000 17-NOV-81
+TURNER 1500 08-SEP-81
+ADAMS  1100 12-JAN-83
+JAMES  950  03-DEC-81
+FORD   3000 03-DEC-81
+MILLER 1300 23-JAN-82
+
+
+-------------------------------------------------------------------------
+2.
+
+declare
+cursor c1 is select * from emp;
+begin
+for i in c1
+loop
+if c1%rowcount=5 then
+dbms_output.put_line(i.ename||' '||i.sal);
+end if;
+end loop;
+end;
+/
+
+OUTPUT:-
+======
+MARTIN 1250
+
+--------------------------------------------------------------------------
+3.
+
+declare
+cursor c1 is select * from emp;
+totalsal number(10):=0;
+begin
+for i in c1
+loop
+totalsal:=totalsal+i.sal;
+end loop;
+dbms_output.put_line('Total salary is:'||totalsal);
+end;
+/
+
+OUTPUT:-
+======
+Total salary is:29025
+
+-------------------------------------------------------------------------
+4.
+
+declare
+cursor c1 is select * from emp;
+begin
+for i in c1
+loop
+if mod(c1%rowcount,2)=0 then
+dbms_output.put_line(i.ename||' '||i.sal);
+end if;
+end loop;
+end;
+/
+
+OUTPUT:-
+======
+ALLEN  1600
+JONES  2975
+BLAKE  2850
+SCOTT  3000
+TURNER 1500
+JAMES  950
+MILLER 1300
+
+-------------------------------------------------------------------------
+
+5.
+
+declare
+cursor c1 is select * from emp order by sal desc;
+begin
+for i in c1
+loop
+if c1%rowcount<=5 then
+dbms_output.put_line(i.ename||' '||i.sal);
+end if;
+end loop;
+end;
+/
+
+OUTPUT:-
+=======
+KING  5000
+FORD  3000
+SCOTT 3000
+JONES 2975
+BLAKE 2850
+
+
+-------------------------------------***END***-------------------------------------
+
+
+
+
+
+ 
+
