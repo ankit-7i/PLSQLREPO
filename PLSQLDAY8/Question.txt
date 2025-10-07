@@ -1,0 +1,50 @@
+                            PROCEDURES TASK
+                           =================
+
+
+1.Write a PL/SQL stored procedure for passing empno is in parameter
+  then return ename,sal from emp table by using out parameter.
+
+--------------------------------------------------------------------------
+
+2.Write a pl/sql stored procedure for passing deptno is in 
+   parameter then return dname,location from dept table
+          by using out parameter?
+
+--------------------------------------------------------------------------
+
+3.Write a pl/sql stored procedure which is used to converts
+   following group by clause report into in,out parameters
+                 from emp table?
+
+SQL>select deptno,count(*)
+    from emp
+    group by deptno;
+
+    DEPTNO        COUNT(*)
+   --------      ----------
+      30             6
+      10             3
+      20             5
+
+
+--------------------------------------------------------------------------
+4.Write PL/SQL stored procedure for withdraw
+
+
+SQL>select * from bank;
+
+Accno          Name          Bal
+------        -------     ---------
+1001          subbarao       3000
+1002          gowtham        4000
+
+
+• if user entered amount is more than available balance than
+
+  ---->insufficient funds 
+
+• if user entered amount is less than available balance than 
+
+  ---->Transaction successful & update the balance
+

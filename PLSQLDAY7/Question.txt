@@ -1,0 +1,142 @@
+                        SUB PROGRAMS
+                      ===================
+
+     Sub programs are named pl/sql blocks.which is used to solve
+particular task. Oracle having 2 types of sub programs.
+
+1.PROCEDURES
+2.FUNCTIONS
+  
+                         SUB PROGRAMS
+                            /     \
+                           /       \
+                     procedure     function
+                  (May or may not  (Must return value)
+                   return values)
+       
+                           PROCEDURES
+                         =============
+
+   Procedures is named PL/SQL block which is used to solve particular
+task and also procedure may or may not return values
+
+   in oracle whenever we are using create or replace keyword infront
+of the procedure then those procedures are internally automatically
+permanently stored in oracle database. That's why those procedures
+are also called as stored as stored procedures.
+
+Oracle Procedure having 2 parts. These are
+1.Procedure Specification
+2.Procedure Body
+
+    in procedure specification we are specifying name of the procedure
+and type of the parameters. Whereas in procedure body we are solving
+actual task.
+
+syntax:-
+========     
+create [or replace] procedure procedurename(formal parameters)
+    is/as
+variable declaration, cursor, user defined exception;
+ begin
+ -----
+ -----
+ [exception]
+ -----
+ -----
+end [procedurename];
+
+To view errors:-
+==============
+syntax:-
+=======
+SQL>show errors;
+
+Executing procedure:-
+====================
+Method1:-
+=======
+syntax:-
+=======
+SQL>exec procedurename(actual parameters);
+
+
+
+1.in mode:-In oracle by default procedure parameter mode is in mode
+=========  in mode is used to pass the values in procedure body.
+           in mode internally behaves like a constant in procedure body.
+
+syntax:-
+=======
+parametername in datatype
+
+
+ *
+*** Out Mode:-out mode is used to  return values from the procedure.
+ *  =========  out parameter internally behaves like a uninitialized
+               variable in procedure body.here explicitly we must
+               specify out keyword.
+
+syntax:-
+=======
+parameter out datatype
+
+create or replace procedure p1(a in number, b out number)
+is                                             |
+begin                                  .out parameter always
+b:=a*a;                                 behaves like a variable
+end;                                   .when you specify out keyword 
+/                                       no need to declare variable
+
+    in oracle when a procedure having out or inout parameters 
+then those type of procedures are allowed to execute by using
+following 2 methods. These are
+
+Method1:-using bind variable
+Method2:-using anonymous block
+
+NOTE:-catch the return values from server->bind variable
+
+exec method1:-(using bind variable)
+============
+SQL>variable z number;
+SQL>exec p1(8,:z);
+SQL>print z;
+
+      Z
+   ------
+      64
+
+----------------------------------------------------------------------------------                   
+1.Write a pl/sql stored procedure for passing empno as a IN
+     parameter then display name of the employee and 
+             his salary from emp table?
+
+-----------------------------------------------------------------------------------
+2.Write a pl/sql stored procedure for passing deptno as a IN  
+     parameter then display employee details from emp table 
+           based on passed department number?
+
+
+-----------------------------------------------------------------------------------
+
+3.Write a pl/sql stored procedure which is used to insert a record
+  into dept table by using in parameter
+
+
+-----------------------------------------------------------------------------------
+4.Create procedure to increment specific employee sal by using
+  specific amount after increment send the updated sal to calling
+  program?
+
+----------------------------------------------------------------------------------
+5.Write a PL/SQL stored procedure for passing ename as IN
+     parameter then return salary of the employee from
+          emp table by using out parameter?
+
+
+-----------------------------------------------------------------------------------
+
+
+
+
