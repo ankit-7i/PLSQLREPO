@@ -1,0 +1,17 @@
+
+
+CREATE OR REPLACE FUNCTION EvenOrOdd (num IN NUMBER)
+RETURN VARCHAR2
+IS
+result VARCHAR2(10);
+BEGIN
+IF MOD(num,2)=0 THEN
+result:='Even';
+ELSE
+result:='Odd';
+END IF;
+RETURN result;
+END;
+/
+
+

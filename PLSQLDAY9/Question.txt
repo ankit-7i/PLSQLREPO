@@ -1,0 +1,99 @@
+                              FUNCTION
+                            ===========
+
+   Function is an named pl/sql block which is used to solve particular
+task and also function must return a value.
+
+      in oracle function having 2 parts. These are
+1.function specification
+2.function body
+
+     in function specification we are specifying name of the function
+and type of the parameters. Whereas in function body we are solving
+actual task.
+
+syntax:-
+========     
+create [or replace] function functionname(formal parameters)
+return datatype
+    is/as
+variable declaration, cursor, user defined exception;
+ begin
+ -----
+ -----
+return expression;
+ [exception]
+ -----
+ -----
+end [functionname];
+
+Executing a function:-
+=====================
+Method1:-(by using select statement)
+===================================
+     
+       in oracle when a function having all parameters are in parameters or when
+a function does not have any parameters then those type of functions are allowed 
+to execute by using select stmt.
+
+syntax:-
+========
+select functionname(actual parameters) from dual;
+
+-----------------------------------------------------------------------------------
+1.Write a PL/SQL stored function for passing number as a parameter then return
+  a message either even or odd based on passed number
+
+-----------------------------------------------------------------------------------
+2.Write a PL/SQL stored function to display balance of customer based 
+  on passed ACCNO
+
+                    (OR)
+
+
+Write a PL/SQL function that takes an account number as input and returns the balance for that account.
+
+
+SQL>SELECT * FROM BANK;
+
+ACCNO          NAME          BAL
+------        -------     ---------
+1001          SUBBARAO       3000
+1002          GOWTHAM        4000
+
+
+--------------------------------------------------------------------------
+Evaluating expressions:-
+=========================
+  in all relational databases if we want to evaluate expressions
+then we must use functions.
+
+
+3.Write a pl/sql stored function for passing salary as a parameter then
+  calculate bonus based on following condition.(This question is not 
+  from emp table outside data)
+
+1.if salary<1000 then bonus is 5% of the salary
+2.if salary>=1000 then salary<2000 then bonus is 10% of the salary
+3.if salary>=2000 and salary<3000 then bonus is 20% of the salary
+4.if salary>=3000 and salary<5000 then bonus is 30% of the salary 
+5.else bonus is 40% of the salary
+
+-----------------------------------------------------------------------------------
+4.Write a PL/SQL stored function that calculates the work experience of an
+  employee based on their hire date.
+
+NOTE:- The function should take the employee number (empno) as input,
+-----  fetch the corresponding  hiredate from the emp table, 
+       and return the experience in years.
+
+-----------------------------------------------------------------------------------
+ *
+*** What are the differences b/w procedure and function ?[V.V.I.M.P]
+ *
+
+
+
+
+
+
