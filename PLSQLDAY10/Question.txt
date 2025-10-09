@@ -1,0 +1,132 @@
+                             PACKAGE TASK
+                            ===============
+
+   Package ia an database object which encapsulate global variables,types,cursors,
+procedures,functions into single unit.
+
+   Generally packages also used to improve perfomance of the application because
+whenever we are calling packaged sub programming first time then automatically
+total package loaded into memory area.
+
+in oracle every package having two parts.
+1)package specification
+2)package body
+
+ in package specification we are declaring global variables,types,procedures,
+functions,cursors.
+
+  where are in package body we are implimenting procedures,functions.
+in oracle package specification objects are public.package body objects are 
+private
+
+1)package specification
+=======================
+synatx:-
+=======
+create or replace package packagename
+is/as
+->gloable variable declarations,constant declarations;
+->cursors declarations;
+->types declarations;
+->procedure declarations;
+->function declaration;
+end;
+/
+
+
+package body
+============
+syntax:-
+=======
+create or replace package body packagename
+is/as
+procedure implementations;
+function implementations;
+end;
+/
+
+calling packaged subprograms:
+============================
+1.calling packaged procedures:
+
+Method1:-
+========
+syntax:-
+=======
+
+SQL>exec packagename.procedurename(actual parameters);
+
+
+2.calling package function:-
+
+Method1:-(using select statement)
+=======
+Syntax:-
+=======
+SQL>select packagename.functionname(actual parameters) from dual;
+
+
+-----------------------------------------------------------------------------------
+1.PL/SQL Package:[Proounce Solutions Pvt.Ltd Interview Question] 
+
+You are tasked with creating a PL/SQL packaage named emp_bonus_pkg that handles employee bonus operations.
+
+create table emp_bonus (
+    emp_id number(10),
+    bonus_amt number(10)
+);
+
+The package should include:
+ -A procedure add_bonus that accepts two parameters:
+  •p_emp_id(employee id) of type NUMBER
+  •p_bonus_amt(bonus amount) of type NUMBER
+
+ -A function get_total_bonus that takes p_emp_id(NUMBER) as input and return total bonus amount(NUMBER) for that employee.
+
+Write the correct syntax for:
+The package specification
+The package body 
+
+-----------------------------------------------------------------------------------
+
+2.Question:Package with Procedure and Function using Local Tables
+
+[PROOUNCE SOLUTIONS Oracle PL/SQL Round 2 Interview Question]
+
+You have a table sales_bonus:
+
+create table sales_bonus
+(
+emp_id number(10),
+month varchar2(10),
+sales_amt number(10),
+bonus number(10)
+);
+
+INSERT INTO SALES_BONUS VALUES (101, 'JANUARY', 120000, NULL);
+INSERT INTO SALES_BONUS VALUES (102, 'JANUARY', 95000, NULL);
+INSERT INTO SALES_BONUS VALUES (103, 'JANUARY', 45000, NULL);
+INSERT INTO SALES_BONUS VALUES (104, 'FEBRUARY', 70000, NULL);
+INSERT INTO SALES_BONUS VALUES (105, 'FEBRUARY', 30000, NULL);
+commit;
+
+
+Task:
+Create a PL/SQL package named bonus_pkg that contains:
+
+-A procedure assign_bonus that:
+ -Accepts p_emp_id and p_month as input.
+ -Calculates bonus:
+   -If sales_amt>100000 →bonus=15% of sales_amt
+   -Else if between 50000 and 100000 →bonus=10%
+   -Else →bonus=5%
+
+-Updates the bonus field in sales_bonus table.
+
+-A function get_bonus_amount that:
+ -Takes p_emp_id and p_month as input.
+ -Returns the bonus for that employee and month.
+
+-----------------------------------------------------------------------------------
+
+
