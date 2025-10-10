@@ -1,0 +1,393 @@
+                           Triggers
+                           ===========
+
+         Trigger is also same as stored procedure. and also it will automatically invoked whenever DML operations performed on table or view.
+
+ all relational databases having two types of triggers
+1.Statement level triggers
+2.row level triggers
+
+   in statement level triggers trigger body is executed only ones per DML
+statements. where as in row level triggers trigger body is executed for
+each and every row for DML statements.
+
+in oracle every trigger having two parts. These are
+1.Trigger specification
+2.Trigger body
+
+        in trigger specification we are specifying name of the trigger and 
+type of the operation. where as in trigger body we are solving actual task.
+
+syntax:-
+=======
+create or replace trigger triggername
+before/after insert/update/delete on tablename
+[for each row]
+[when condition]
+[declare]
+variable declaration, cursor, user defined exception;
+begin
+---
+---
+end;
+/
+
+Difference b/w statement level, row level triggers:-
+==================================================
+statement level :-
+===============
+create or replace trigger tr1
+after update on emp
+begin
+dbms_output.put_line('statement level');
+end;
+/
+trigger created
+
+Testing:-
+=======
+SQL>update emp set sal=sal+100 where where deptno=10;
+
+statement level 
+
+3 rows updated
+
+SQL>update emp set sal=sal+100 where deptno=90;
+
+statement level 
+
+0 rows updated
+
+SQL>drop trigger tr1;[compulsary drop the trigger]
+
+row level trigger:-
+==================
+create or replace trigger tr2
+after update on emp
+for each row
+begin
+dbms_output.put_line('row level');
+end;
+/
+
+SQL>update emp set sal=sal+100 where deptno=10;
+
+row level
+row level
+row level
+
+3 rows updated
+
+SQL>update emp set sal=sal+100 where deptno=90;
+
+0 rows updated
+
+-----------------------------------------------------------------------------------
+Statement level trigger:-
+=======================
+  In statement level trigger trigger body is executed only once per DML statements. In oracle statement level triggers does not have old, new buffers and also in statement level trigger we are not allowed to use for each row clause.
+
+  Generally  whenever we are implementing time component based applications by using triggers then we must use statement level triggers.
+
+
+-----------------------------------------------------------------------------------
+ *
+*1*Write a PL/SQL statement level trigger on emp table not allowed to
+ *    perform DML operations on Saturday, Sundays?[V.V.I.M.P]
+
+
+
+-----------------------------------------------------------------------------------
+2.Write a pl/sql row level trigger on emp table whenever user inserting
+      data into emp table then user inserted salary should
+                   be more than 5000
+
+
+-----------------------------------------------------------------------------------
+3.Write a pl/sql row level trigger on emp table not allowed to delete
+   10th departmentno records from emp table?
+
+
+
+-----------------------------------------------------------------------------------
+4.Write a pl/sql row level trigger on emp table whenever user deleting rows
+  from emp table then those deleted records are automatically stored in 
+  another table?
+
+
+ *
+***Creating a new table from existing table(or)Copying a table from  another table
+ * ===============================================================================
+syntax:-
+=======
+SQL> create table newtablename
+     as
+     select * from existingtablename;
+
+
+
+ *
+*** Creating a new table from existing table without copying data:-
+ *  =============================================================
+
+syntax:-
+=======
+
+SQL>create table newtablename
+      as
+    select * from existingtablename
+    where false condition;
+
+•Eg of false condition
+----> 1=2
+---->'A'='B'
+
+
+create table backup
+as
+select * from emp
+where 1=2;
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------ANSWERS-------------------------------------------
+1.
+
+create or replace trigger tr1
+before insert or update or delete on emp
+begin
+if to_char(sysdate,'DY') in('SAT','SUN') then
+raise_application_error(-20143,'we can not perform dmls on sat,sundays'); 
+end if;
+end;
+/
+
+Testing:-
+=======
+delete from emp where sal>2000;
+
+ORA-20143: we can not perform dmls on sat,sundays
+
+
+----------------------------***drop trigger tr1***------------------------
+
+2.
+
+create or replace trigger tr2
+before insert on emp
+for each row
+begin
+if :new.sal<5000 then
+raise_application_error(-20743,'salary should be more than 5000');
+end if;
+end;
+/
+
+Testing:-
+=======
+insert into emp(empno,ename,sal)values(1,'anushka',3000);
+
+ORA-20743:salary should be more than 50000
+
+insert into emp(empno,ename,sal)values(2,'surya',8000);
+
+1 row created
+
+----------------------------***drop trigger tr2***--------------------------------
+3.
+
+create or replace trigger tr3
+before delete on emp
+for each row
+begin
+if :old.deptno=10 then
+raise_application_error(-20123,'we can not delete deptno 10');
+end if;
+end;
+/
+
+Testing:-
+======
+delete from emp where deptno=10;
+
+ORA-20123:we can not delete deptno 10
+
+----------------------------------***drop trigger tr3***--------------------------
+4.
+
+create or replace trigger tr4
+after delete on emp
+for each row
+begin
+insert into backup values(:old.empno,:old.ename,:old.job,:old.mgr,:old.hiredate,
+:old.sal,:old.comm,:old.deptno);
+end;
+/
+
+
+Testing:-
+========
+delete from emp where sal>2000;
+
+6 rows deleted.
+
+SQL> select * from backup;
+
+--------------------------------***drop trigger tr4***-----------------------------
+
+  
+
